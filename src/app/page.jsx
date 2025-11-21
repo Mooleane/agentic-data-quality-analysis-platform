@@ -1,10 +1,25 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import FileUpload from '../components/FileUpload';
 import '../styles/HomePage.css';
 
 export default function Home() {
+  const [recentAnalyses, setRecentAnalyses] = useState([]);
+
+  useEffect(() => {
+    // Load recent analyses from localStorage
+    const stored = localStorage.getItem('recentAnalyses');
+    if (stored) {
+      try {
+        setRecentAnalyses(JSON.parse(stored));
+      } catch (err) {
+        console.error('Failed to load recent analyses:', err);
+      }
+    }
+  }, []);
+
   return (
     <div className="home-container">
       <header className="home-header">
@@ -29,6 +44,43 @@ export default function Home() {
             <FileUpload />
           </div>
         </section>
+
+        <section className="tips-section">
+          <div className="tips-card">
+            <h3>💡 Quick Tips for Better Results</h3>
+            <ul className="tips-list">
+              <li><strong>Format Consistency:</strong> Ensure all data in columns follow the same format</li>
+              <li><strong>Complete Data:</strong> Minimize missing values for more accurate analysis</li>
+              <li><strong>Clear Headers:</strong> Use descriptive column names for better insights</li>
+              <li><strong>Data Size:</strong> Files up to 50MB are supported; larger files may take longer</li>
+              <li><strong>No Personally Identifiable Information:</strong> Avoid including sensitive personal data</li>
+            </ul>
+          </div>
+        </section>
+
+        {recentAnalyses.length > 0 && (
+          <section className="recent-section">
+            <div className="recent-card">
+              <h3>📋 Recent Analyses</h3>
+              <div className="recent-list">
+                {recentAnalyses.slice(0, 5).map((analysis, idx) => (
+                  <div key={idx} className="recent-item">
+                    <div className="recent-info">
+                      <p className="recent-filename">{analysis.fileName}</p>
+                      <p className="recent-meta">
+                        {analysis.rowCount} rows • Score: {analysis.qualityScore}/100
+                      </p>
+                      <p className="recent-date">{analysis.timestamp}</p>
+                    </div>
+                    <span className={`recent-score ${analysis.scoreColor}`}>
+                      {analysis.qualityScore}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="features-section">
           <h2 className="section-title">What You Can Do</h2>

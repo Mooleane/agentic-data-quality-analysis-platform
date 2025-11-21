@@ -96,6 +96,27 @@ export default function FileUpload() {
       sessionStorage.setItem('analysisData', JSON.stringify(analysisResults));
       sessionStorage.setItem('rawData', JSON.stringify(parsedData));
 
+      // Save to recent analyses in localStorage
+      const getScoreColor = (score) => {
+        if (score >= 90) return 'excellent';
+        if (score >= 70) return 'good';
+        if (score >= 50) return 'fair';
+        return 'poor';
+      };
+
+      const recentAnalysis = {
+        fileName: file.name,
+        qualityScore: analysisResults.qualityScore,
+        rowCount: analysisResults.rowCount,
+        scoreColor: getScoreColor(analysisResults.qualityScore),
+        timestamp: new Date().toLocaleString(),
+      };
+
+      const stored = localStorage.getItem('recentAnalyses') || '[]';
+      const recentAnalyses = JSON.parse(stored);
+      recentAnalyses.unshift(recentAnalysis);
+      localStorage.setItem('recentAnalyses', JSON.stringify(recentAnalyses.slice(0, 10)));
+
       // Navigate to analysis page
       router.push('/analysis');
     } catch (err) {
@@ -160,7 +181,11 @@ export default function FileUpload() {
 
         {uploading ? (
           <div className="upload-progress">
-            <div className="progress-spinner"></div>
+            <div className="progress-bar-container">
+              <div className="progress-bar">
+                <div className="progress-bar-fill"></div>
+              </div>
+            </div>
             <p>Processing {fileName}...</p>
           </div>
         ) : (

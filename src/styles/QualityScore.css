@@ -80,6 +80,25 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.score-trend {
+  margin: var(--spacing-md) 0 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  display: inline-block;
+}
+
+.score-trend.trend-up {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #065f46;
+}
+
+.score-trend.trend-down {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #7f1d1d;
+}
+
 .score-display.excellent .score-label {
   color: #065f46;
 }

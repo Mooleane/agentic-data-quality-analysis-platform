@@ -13,6 +13,7 @@ export default function QualityScore({ data }) {
   }
 
   const { qualityScore = 0, metrics = {} } = data;
+
   const getScoreColor = (score) => {
     if (score >= 90) return 'excellent';
     if (score >= 70) return 'good';
@@ -27,6 +28,23 @@ export default function QualityScore({ data }) {
     return 'Poor';
   };
 
+  // Calculate trend from previous analysis
+  const getTrend = () => {
+    try {
+      const stored = localStorage.getItem('previousQualityScore');
+      if (stored) {
+        const prev = parseFloat(stored);
+        if (qualityScore > prev) return { direction: 'up', change: qualityScore - prev };
+        if (qualityScore < prev) return { direction: 'down', change: prev - qualityScore };
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  };
+
+  const trend = getTrend();
+
   return (
     <div className="quality-score">
       <h2>Data Quality Score</h2>
@@ -37,6 +55,11 @@ export default function QualityScore({ data }) {
           <span className="score-max">/100</span>
         </div>
         <p className="score-label">{getScoreLabel(qualityScore)}</p>
+        {trend && (
+          <p className={`score-trend trend-${trend.direction}`}>
+            {trend.direction === 'up' ? '↑' : '↓'} {trend.change.toFixed(1)} points {trend.direction === 'up' ? 'improvement' : 'decline'}
+          </p>
+        )}
       </div>
 
       <div className="metrics-breakdown">
@@ -131,6 +154,9 @@ export default function QualityScore({ data }) {
           <p>✗ Poor - Significant data quality issues detected. Action needed.</p>
         )}
       </div>
+
+      {/* Store current score for trend calculation next time */}
+      {typeof window !== 'undefined' && localStorage.setItem('previousQualityScore', qualityScore.toString())}
     </div>
   );
 }

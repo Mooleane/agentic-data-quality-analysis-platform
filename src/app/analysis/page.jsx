@@ -13,13 +13,29 @@ export default function AnalysisPage() {
   const [analysisData, setAnalysisData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [previousAnalysis, setPreviousAnalysis] = useState(null);
+  const [showComparison, setShowComparison] = useState(false);
 
   useEffect(() => {
     // Retrieve analysis data from session storage
     const storedData = sessionStorage.getItem('analysisData');
     if (storedData) {
       try {
-        setAnalysisData(JSON.parse(storedData));
+        const currentAnalysis = JSON.parse(storedData);
+        setAnalysisData(currentAnalysis);
+
+        // Load previous analysis for comparison
+        const stored = localStorage.getItem('lastAnalysis');
+        if (stored) {
+          try {
+            setPreviousAnalysis(JSON.parse(stored));
+          } catch {
+            setPreviousAnalysis(null);
+          }
+        }
+
+        // Store current as last for next time
+        localStorage.setItem('lastAnalysis', storedData);
       } catch (err) {
         setError('Failed to load analysis data');
       }
@@ -82,6 +98,82 @@ export default function AnalysisPage() {
             <section className="analysis-section quality-section">
               <QualityScore data={analysisData} />
             </section>
+
+            {/* Comparison Section */}
+            {previousAnalysis && (
+              <section className="analysis-section comparison-section">
+                <div className="comparison-card">
+                  <div className="comparison-header">
+                    <h3>📊 Before/After Comparison</h3>
+                    <button
+                      className="comparison-toggle"
+                      onClick={() => setShowComparison(!showComparison)}
+                      aria-expanded={showComparison}
+                    >
+                      {showComparison ? '▼ Hide' : '▶ Show'}
+                    </button>
+                  </div>
+                  {showComparison && (
+                    <div className="comparison-content">
+                      <div className="comparison-item">
+                        <div className="comparison-before">
+                          <h4>Previous Analysis</h4>
+                          <p className="comparison-file">{previousAnalysis.fileName}</p>
+                          <div className="comparison-metrics">
+                            <div className="metric">
+                              <span>Quality Score</span>
+                              <span className="metric-value">{previousAnalysis.qualityScore}/100</span>
+                            </div>
+                            <div className="metric">
+                              <span>Completeness</span>
+                              <span className="metric-value">{previousAnalysis.metrics?.completeness?.toFixed(1) || 0}%</span>
+                            </div>
+                            <div className="metric">
+                              <span>Consistency</span>
+                              <span className="metric-value">{previousAnalysis.metrics?.consistency?.toFixed(1) || 0}%</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="comparison-arrow">→</div>
+                        <div className="comparison-after">
+                          <h4>Current Analysis</h4>
+                          <p className="comparison-file">{analysisData.fileName}</p>
+                          <div className="comparison-metrics">
+                            <div className="metric">
+                              <span>Quality Score</span>
+                              <span className="metric-value">{analysisData.qualityScore}/100</span>
+                            </div>
+                            <div className="metric">
+                              <span>Completeness</span>
+                              <span className="metric-value">{analysisData.metrics?.completeness?.toFixed(1) || 0}%</span>
+                            </div>
+                            <div className="metric">
+                              <span>Consistency</span>
+                              <span className="metric-value">{analysisData.metrics?.consistency?.toFixed(1) || 0}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="comparison-summary">
+                        {analysisData.qualityScore > previousAnalysis.qualityScore ? (
+                          <p className="improvement">
+                            ✓ Quality improved by {(analysisData.qualityScore - previousAnalysis.qualityScore).toFixed(1)} points
+                          </p>
+                        ) : analysisData.qualityScore < previousAnalysis.qualityScore ? (
+                          <p className="decline">
+                            ✗ Quality declined by {(previousAnalysis.qualityScore - analysisData.qualityScore).toFixed(1)} points
+                          </p>
+                        ) : (
+                          <p className="stable">
+                            ◐ Quality score remains stable
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
 
             {/* Data Preview Section */}
             <section className="analysis-section preview-section">

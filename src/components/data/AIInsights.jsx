@@ -45,6 +45,38 @@ export default function AIInsights({ data }) {
     }
   };
 
+  const copyToClipboard = (text, type = 'text') => {
+    navigator.clipboard.writeText(text).then(() => {
+      alert(`${type} copied to clipboard!`);
+    }).catch(() => {
+      alert('Failed to copy to clipboard');
+    });
+  };
+
+  const exportReport = () => {
+    let reportText = `DATA QUALITY ANALYSIS REPORT\n`;
+    reportText += `File: ${data?.fileName || 'Unknown'}\n`;
+    reportText += `Generated: ${new Date().toLocaleString()}\n`;
+    reportText += `\n=== QUALITY SCORE ===\n${data?.qualityScore}/100\n`;
+    reportText += `\n=== INSIGHTS ===\n${insights || 'No insights generated'}\n`;
+    reportText += `\n=== RECOMMENDATIONS ===\n`;
+    if (Array.isArray(recommendations) && recommendations.length > 0) {
+      recommendations.forEach((rec, idx) => {
+        reportText += `\n${idx + 1}. ${rec.action}\n   Priority: ${rec.priority}\n   Benefit: ${rec.benefit}\n`;
+      });
+    } else {
+      reportText += 'No recommendations available';
+    }
+
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(reportText));
+    element.setAttribute('download', `quality-report-${Date.now()}.txt`);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
   useEffect(() => {
     // Auto-generate insights on mount
     if (!insights && !loading) {
@@ -79,7 +111,10 @@ export default function AIInsights({ data }) {
 
           {insights && !loading && (
             <div className="insights-content">
-              <p>{insights}</p>
+              <div className="content-with-action">
+                <p>{insights}</p>
+                <button className="copy-button" onClick={() => copyToClipboard(insights, 'Insights')} aria-label="Copy insights to clipboard">📋 Copy</button>
+              </div>
             </div>
           )}
 
@@ -98,21 +133,24 @@ export default function AIInsights({ data }) {
           {recommendations && !loading && (
             <div className="recommendations-content">
               {Array.isArray(recommendations) && recommendations.length > 0 ? (
-                <ul className="recommendations-list">
-                  {recommendations.map((rec, idx) => (
-                    <li key={idx} className={`recommendation-item priority-${rec.priority}`}>
-                      <div className="rec-header">
-                        <span className="priority-badge">{rec.priority}</span>
-                        <h4>{rec.action}</h4>
-                      </div>
-                      {rec.benefit && (
-                        <p className="rec-benefit">
-                          <strong>Benefit:</strong> {rec.benefit}
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <ul className="recommendations-list">
+                    {recommendations.map((rec, idx) => (
+                      <li key={idx} className={`recommendation-item priority-${rec.priority}`}>
+                        <div className="rec-header">
+                          <span className="priority-badge">{rec.priority}</span>
+                          <h4>{rec.action}</h4>
+                        </div>
+                        {rec.benefit && (
+                          <p className="rec-benefit">
+                            <strong>Benefit:</strong> {rec.benefit}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="export-button" onClick={exportReport} aria-label="Download report as text file">📥 Download Report</button>
+                </div>
               ) : (
                 <p className="no-recommendations">
                   {data?.recommendations && data.recommendations.length > 0
