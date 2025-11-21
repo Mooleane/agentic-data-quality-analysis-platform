@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Papa from 'papaparse';
-import { analyzeDataQuality } from '@/lib/dataAnalysis';
+import { analyzeDataQuality } from '../lib/dataAnalysis';
 import '../styles/FileUpload.css';
 
 export default function FileUpload() {

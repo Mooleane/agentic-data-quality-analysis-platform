@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import FileUpload from '@/components/FileUpload';
+import FileUpload from '../components/FileUpload';
 import '../styles/HomePage.css';
 
 export default function Home() {

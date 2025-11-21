@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import DataPreview from '@/components/data/DataPreview';
-import QualityScore from '@/components/data/QualityScore';
-import DataVisualizations from '@/components/data/DataVisualizations';
-import ColumnDetails from '@/components/data/ColumnDetails';
-import AIInsights from '@/components/data/AIInsights';
+import ErrorBoundary from '../../components/ErrorBoundary';
+import DataPreview from '../../components/data/DataPreview';
+import QualityScore from '../../components/data/QualityScore';
+import DataVisualizations from '../../components/data/DataVisualizations';
+import ColumnDetails from '../../components/data/ColumnDetails';
+import AIInsights from '../../components/data/AIInsights';
 import '../../styles/AnalysisPage.css';
 
 export default function AnalysisPage() {

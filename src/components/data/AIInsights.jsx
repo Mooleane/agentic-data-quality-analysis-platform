@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { generateAIInsights, generateAIRecommendations } from '@/lib/aiIntegration';
+import { generateAIInsights, generateAIRecommendations } from '../../lib/aiIntegration';
 import '../../styles/AIInsights.css';
 
 export default function AIInsights({ data }) {

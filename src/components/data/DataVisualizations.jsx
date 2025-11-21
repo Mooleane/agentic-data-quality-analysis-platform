@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
-import { generateDataTypeDistribution } from '@/lib/dataAnalysis';
+import { generateDataTypeDistribution } from '../../lib/dataAnalysis';
 import '../../styles/DataVisualizations.css';
 
 export default function DataVisualizations({ data }) {
