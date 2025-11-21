@@ -1,0 +1,113 @@
+/* Data Preview Styles */
+
+.data-preview {
+  width: 100%;
+}
+
+.preview-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.data-table thead {
+  background-color: var(--color-bg-secondary);
+  border-bottom: 2px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.data-table th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.data-table th.row-number {
+  width: 40px;
+  text-align: center;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.data-table td {
+  padding: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+.data-table td.row-number {
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  width: 40px;
+}
+
+.cell-content {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  white-space: nowrap;
+}
+
+.preview-note {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.preview-empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .data-table {
+    font-size: var(--font-size-xs);
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: var(--spacing-sm);
+  }
+
+  .cell-content {
+    max-width: 100px;
+  }
+
+  .data-table th {
+    max-width: 100px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .data-table thead {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .data-table tbody tr:hover {
+    background-color: var(--color-bg-tertiary);
+  }
+}

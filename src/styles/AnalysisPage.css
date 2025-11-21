@@ -1,0 +1,215 @@
+/* Analysis Page Styles */
+
+.analysis-container {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.analysis-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.analysis-header h1 {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+}
+
+.file-info {
+  margin: var(--spacing-sm) 0 0 0;
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.file-info strong {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  margin: 0 var(--spacing-sm) 0 0;
+}
+
+.file-info span {
+  display: block;
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-xs);
+}
+
+.back-link {
+  color: white;
+  text-decoration: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.back-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+}
+
+.back-link:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Analysis Main */
+
+.analysis-main {
+  flex: 1;
+  padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.analysis-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.analysis-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.analysis-section h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+}
+
+/* Loading and Error States */
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: var(--spacing-md);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--color-border);
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.error-message h2 {
+  color: #991b1b;
+  margin-top: 0;
+}
+
+.error-message p {
+  color: #7f1d1d;
+  margin: var(--spacing-md) 0;
+}
+
+.error-message .back-link {
+  display: inline-block;
+  color: white;
+  background-color: var(--color-error);
+  text-decoration: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
+}
+
+.error-message .back-link:hover {
+  background-color: #dc2626;
+}
+
+/* Layout for different screen sizes */
+
+@media (max-width: 1024px) {
+  .analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quality-section {
+    order: -1;
+  }
+
+  .preview-section {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .analysis-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analysis-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .back-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .analysis-main {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .analysis-section {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .analysis-section {
+    background: var(--color-bg-secondary);
+  }
+
+  .error-message {
+    background-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+  }
+
+  .error-message h2 {
+    color: #fca5a5;
+  }
+
+  .error-message p {
+    color: #fecaca;
+  }
+}

@@ -1,0 +1,16 @@
+date,product,quantity,price,customer,region
+2024-01-15,Laptop,2,1200,John Smith,North
+2024-01-16,Mouse,5,25,Jane Doe,South
+2024-01-17,Keyboard,3,75,Bob Johnson,East
+2024-01-18,Monitor,1,400,Alice Williams,West
+2024-01-19,Laptop,1,1200,Charlie Brown,North
+2024-01-20,Headphones,4,150,Diana Prince,South
+2024-01-21,Laptop,2,1200,Eve Davis,East
+2024-01-22,Mouse,10,25,Frank Miller,West
+2024-01-23,Keyboard,2,75,Grace Lee,North
+2024-01-24,Monitor,2,400,Henry Wilson,South
+2024-01-25,Laptop,1,1200,Iris Martinez,East
+2024-01-26,Headphones,3,150,Jack Taylor,West
+2024-01-27,Mouse,,25,John Smith,North
+2024-01-28,Keyboard,1,75,Jane Doe,South
+2024-01-29,Monitor,1,400,Bob Johnson,East

@@ -1,0 +1,13 @@
+name,age,email,salary,department
+John Smith,32,john.smith@company.com,75000,Engineering
+Jane Doe,28,jane.doe@company.com,68000,Product
+Bob Johnson,45,bob.johnson@company.com,85000,Engineering
+Alice Williams,35,alice.williams@company.com,72000,Sales
+Charlie Brown,29,charlie.brown@company.com,65000,Marketing
+Diana Prince,38,diana.prince@company.com,90000,Engineering
+Eve Davis,31,eve.davis@company.com,70000,Product
+Frank Miller,42,frank.miller@company.com,,Sales
+Grace Lee,26,grace.lee@example.com,62000,Marketing
+Henry Wilson,50,henry.wilson@company.com,95000,Engineering
+Iris Martinez,33,iris.martinez@company.com,71000,Product
+Jack Taylor,29,jack.taylor@company.com,63000,Sales

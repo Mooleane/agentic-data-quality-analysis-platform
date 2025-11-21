@@ -1,7 +1,2 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+// This file is not used - Next.js is the build tool for this project
+// Kept for reference only

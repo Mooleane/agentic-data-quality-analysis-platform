@@ -1,0 +1,210 @@
+/* Quality Score Styles */
+
+.quality-score {
+  width: 100%;
+}
+
+.score-display {
+  text-align: center;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.score-display.excellent {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border: 2px solid var(--color-quality-excellent);
+}
+
+.score-display.good {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid var(--color-quality-good);
+}
+
+.score-display.fair {
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+  border: 2px solid #f97316;
+}
+
+.score-display.poor {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 2px solid var(--color-quality-poor);
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-md);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: var(--font-weight-bold);
+}
+
+.score-display.excellent .score-circle {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-quality-excellent);
+}
+
+.score-display.good .score-circle {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-quality-good);
+}
+
+.score-display.fair .score-circle {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+.score-display.poor .score-circle {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-quality-poor);
+}
+
+.score-value {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.score-max {
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+}
+
+.score-label {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.score-display.excellent .score-label {
+  color: #065f46;
+}
+
+.score-display.good .score-label {
+  color: #92400e;
+}
+
+.score-display.fair .score-label {
+  color: #92400e;
+}
+
+.score-display.poor .score-label {
+  color: #7f1d1d;
+}
+
+/* Metrics Breakdown */
+
+.metrics-breakdown {
+  margin-bottom: var(--spacing-lg);
+}
+
+.metrics-breakdown h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+}
+
+.metric-item {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.metric-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.metric-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.metric-label span:first-child {
+  color: var(--color-text-primary);
+}
+
+.metric-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.metric-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.metric-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  transition: width var(--transition-slow);
+  border-radius: 4px;
+}
+
+.metric-description {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* Score Guidance */
+
+.score-guidance {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.score-guidance p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .score-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .score-value {
+    font-size: 2rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .score-display.excellent,
+  .score-display.good,
+  .score-display.fair,
+  .score-display.poor {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .score-circle {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .metric-bar {
+    background-color: var(--color-border);
+  }
+
+  .score-guidance {
+    background-color: var(--color-bg-tertiary);
+  }
+}
